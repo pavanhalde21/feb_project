@@ -11,8 +11,8 @@ from utils.vaultUtils import VaultClient
 from utils.snowUtils import SnowflakeConnector
 
 VAULT_URL = "http://127.0.0.1:8200"
-ROLE_ID = "8dc93e37-1c57-30e2-bb22-990cd1305732"
-SECRET_ID = "7cd2c91b-f74d-b651-7671-de342b790454"
+ROLE_ID = "6481799b-8226-29fd-ab1b-49e5f4d638cc"
+SECRET_ID = "66ab291e-1482-9f09-f53a-583b0e881f87"
 SECRET_PATH = "secret/data/snowflake"
 
 vault_client = VaultClient(VAULT_URL, ROLE_ID, SECRET_ID, SECRET_PATH)
@@ -46,10 +46,14 @@ snowflake_conn = SnowflakeConnector(account, username, password, warehouse, data
 snowflake_conn.connect()
 
 # # Execute a query
-query_result = snowflake_conn.execute_query("SELECT * FROM MYDB.public.customer_data1")
+query_result = snowflake_conn.execute_query("SELECT * FROM MYDB.public.customer")
 
 # # Print the result
 print("Current Date in Snowflake:", query_result[0][0])
+
+
+for row in query_result:
+    print(row)
 
 # # Close the connection
 snowflake_conn.close_connection()
